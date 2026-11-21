@@ -1,0 +1,283 @@
+/* Dusk Cove — page styling. The page wears the scene's own dusk palette:
+   indigo night, amber lamplight, parchment panels. */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #1d1b33;
+  color: #f4efe4;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 12px 16px;
+}
+
+#topbar {
+  width: 1160px;
+  max-width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+#topbar h1 {
+  margin: 2px 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: #ffd76e;
+}
+
+#topbar h1 span {
+  font-size: 17px;
+  color: #b8b2d9;
+  letter-spacing: 0.5px;
+}
+
+#level-name {
+  margin: 2px 0;
+  font-size: 17px;
+  font-style: italic;
+  color: #f2b134;
+}
+
+#hud {
+  width: 1160px;
+  max-width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin: 6px 0 10px;
+}
+
+.hud-box {
+  background: #2b2a55;
+  border: 1px solid #4a4580;
+  border-radius: 10px;
+  padding: 6px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 118px;
+}
+
+.hud-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #b8b2d9;
+}
+
+.hud-big {
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 1.05;
+}
+
+.hud-remaining {
+  background: #4a2c50;
+  border-color: #e2703a;
+  align-items: center;
+}
+
+.hud-remaining .hud-big {
+  font-size: 38px;
+  color: #ffd76e;
+}
+
+.hud-time { flex: 0 0 210px; }
+
+#time-left.urgent {
+  color: #ff7a6e;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+#time-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: #17152b;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+#time-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: #57b25e;
+  transition: width 0.25s linear, background 0.5s;
+}
+
+.hud-actions {
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.hud-actions button {
+  font-family: inherit;
+  font-size: 16px;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid #ffd76e;
+  background: #3a3566;
+  color: #ffd76e;
+  cursor: pointer;
+}
+
+.hud-actions button:hover { background: #4a4580; }
+.hud-actions button:focus-visible { outline: 3px solid #7dd7fc; outline-offset: 2px; }
+
+.hud-keys {
+  font-size: 13px;
+  color: #8f89b8;
+  margin-left: auto;
+}
+
+#stage {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  width: 1160px;
+  max-width: 100%;
+  justify-content: center;
+}
+
+#stage.flash::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 14px;
+  box-shadow: 0 0 0 3px rgba(255, 215, 110, 0.85), 0 0 42px rgba(255, 183, 92, 0.55);
+  animation: flashfade 0.45s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes flashfade {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.panel-wrap { margin: 0; }
+
+.panel-wrap canvas {
+  display: block;
+  width: 560px;
+  height: 400px;
+  border-radius: 10px;
+  border: 2px solid #4a4580;
+  cursor: crosshair;
+  background: #2b2a55;
+}
+
+.panel-wrap canvas.shake { animation: shake 0.3s; }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-3px); }
+}
+
+.panel-wrap figcaption {
+  text-align: center;
+  margin-top: 5px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b8b2d9;
+}
+
+#toast {
+  position: absolute;
+  left: 50%;
+  bottom: 44px;
+  transform: translateX(-50%);
+  background: rgba(23, 21, 43, 0.92);
+  color: #ffd76e;
+  border: 1px solid #ffd76e;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-size: 16px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#toast.show { animation: toastup 2.2s ease-out forwards; }
+
+@keyframes toastup {
+  0% { opacity: 0; transform: translate(-50%, 8px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  82% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(19, 17, 38, 0.66);
+  border-radius: 10px;
+}
+
+#overlay[hidden] { display: none; }
+
+#overlay-card {
+  background: #2b2a55;
+  border: 1px solid #ffd76e;
+  border-radius: 14px;
+  padding: 26px 34px;
+  max-width: 520px;
+  text-align: center;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+#overlay-card h2 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  color: #ffd76e;
+}
+
+#overlay-card p {
+  margin: 0 0 18px;
+  font-size: 16.5px;
+  line-height: 1.5;
+  color: #e8e2f2;
+}
+
+#overlay-btn {
+  font-family: inherit;
+  font-size: 18px;
+  padding: 11px 26px;
+  border-radius: 9px;
+  border: none;
+  background: #e2703a;
+  color: #fff7ea;
+  cursor: pointer;
+}
+
+#overlay-btn:hover { background: #f07f45; }
+#overlay-btn:focus-visible { outline: 3px solid #7dd7fc; outline-offset: 2px; }
+
+#status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
