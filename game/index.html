@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dusk Cove — Spot the Difference</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header id="topbar">
+  <h1>Dusk Cove <span>· spot the difference</span></h1>
+  <p id="level-name">Level 1 · First Light Cove</p>
+</header>
+
+<section id="hud" aria-label="Game status">
+  <div class="hud-box hud-remaining">
+    <span class="hud-label">Remaining</span>
+    <span id="remaining" class="hud-big">5</span>
+  </div>
+  <div class="hud-box hud-time">
+    <span class="hud-label">Time</span>
+    <span id="time-left" class="hud-big">2:00</span>
+    <div id="time-bar"><div id="time-bar-fill"></div></div>
+  </div>
+  <div class="hud-box">
+    <span class="hud-label">Score</span>
+    <span id="score" class="hud-big">0</span>
+  </div>
+  <div class="hud-box hud-actions">
+    <button id="hint-btn" type="button">Hint (<span id="hints-left">3</span> left)</button>
+    <button id="restart-btn" type="button">Restart cove</button>
+    <span class="hud-keys">keys: H hint · R restart</span>
+  </div>
+</section>
+
+<main id="stage">
+  <figure class="panel-wrap">
+    <canvas id="panel-left" width="560" height="400" aria-label="The original picture of Dusk Cove"></canvas>
+    <figcaption>Original</figcaption>
+  </figure>
+  <figure class="panel-wrap">
+    <canvas id="panel-right" width="560" height="400" aria-label="The changed picture of Dusk Cove"></canvas>
+    <figcaption>Changed</figcaption>
+  </figure>
+  <div id="toast" aria-hidden="true"></div>
+  <div id="overlay">
+    <div id="overlay-card">
+      <h2 id="overlay-title">Dusk Cove</h2>
+      <p id="overlay-text"></p>
+      <button id="overlay-btn" type="button">Start the hunt</button>
+    </div>
+  </div>
+</main>
+
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./game.js"></script>
+</body>
+</html>
